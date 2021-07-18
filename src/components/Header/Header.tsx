@@ -1,10 +1,10 @@
 import { Box, Button } from '@material-ui/core';
-import { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { createStyles, makeStyles, Theme } from '@material-ui/core/styles';
 import style from './Header.module.css';
-import user from './../../images/user.png'
+import user from './../../images/user.png';
+import { HeaderPropsType } from '../type/type';
 
 const useStyles = makeStyles((theme: Theme) =>
     createStyles({
@@ -17,27 +17,27 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const Header: React.FC = () => {
-    const [accessToken, setUserStatus] = useState(true)
+const Header: React.FC<HeaderPropsType> = ({ data, setAccessToken, accessToken }) => {
 
-    const onClickHandleSubmit = () => {
-        setUserStatus(!accessToken)
+    const onClickRemoveItems = () => {
+        sessionStorage.removeItem('token')
+        setAccessToken("")
     }
 
-    const name = "12332";
-    const email = "user@ozitag.com";
+    const email = data.email;
     const classes = useStyles();
     return (
         <Box className={style.authorisation}>
             <Box className={style.authorisation__login}>
-                {accessToken ? <Box className={classes.userName} display="flex" flexDirection="row" alignItems="center" p={1} m={1}>
-                    <Box >
-                        {name}
+                {accessToken ?
+                    <Box className={classes.userName} display="flex" flexDirection="row" alignItems="center" p={1} m={1}>
+                        <Box >
+                            {email}
+                        </Box>
+                        <Box>
+                            <img src={user} alt='userPhoto' width="40px" height="40px" />
+                        </Box>
                     </Box>
-                    <Box>
-                        <img src={user} alt='userPhoto' width="40px" height="40px" />
-                    </Box>
-                </Box>
                     :
                     <Box />}
             </Box>
@@ -49,7 +49,7 @@ const Header: React.FC = () => {
                             color="secondary"
                             className={classes.button}
                             startIcon={<ExitToAppIcon />}
-                            onClick={() => { onClickHandleSubmit() }}
+                            onClick={() => onClickRemoveItems()}
                         >
                             Exit
                         </Button>

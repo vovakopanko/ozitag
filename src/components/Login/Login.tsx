@@ -1,50 +1,55 @@
 import { Box, Button } from '@material-ui/core';
 import style from './Login.module.css';
-import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { useFormik } from 'formik';
+import { LoginType } from '../type/type';
 
-type LoginType = {
-    name: string;
-    email: string;
-}
+const Login: React.FC<LoginType> = ({ setUserData }) => {
 
-const Login: React.FC<LoginType> = () => {
-    const [userData, setUserData] = useState([])
-    const [login, setLogin] = useState("")
-    const [password, setPassword] = useState("")
-
-
-    const onHandleClickUserLogin = (login: string) => {
-        setLogin(login)
-    }
-
-    const onHandleClickUserPassword = (password: string) => {
-        setPassword(password)
-    }
+    const formik = useFormik({
+        initialValues: {
+            email: '',
+            password: '',
+        },
+        onSubmit: values => {
+            console.log(`submit ${values}`)
+            setUserData(JSON.stringify(values, null, 2))
+        },
+    })
 
     return <Box className={style.login}>
         <Box>
-            <h1>REGISTRATION:</h1>
+            <b>REGISTRATION:</b>
         </Box>
-        <Box>
-            <input type="text" placeholder="write your login" onChange={(e) => onHandleClickUserLogin(e.target.value)}></input>
-        </Box>
-        <Box>
-            <input type="password" onChange={(e) => onHandleClickUserPassword(e.target.value)}></input>
-        </Box>
-        <Box>
-            <Button variant="outlined">Login</Button>
-            <NavLink to="/profile">
-                <Button variant="outlined" color="primary">
-                    Registration
-                </Button>
-            </NavLink>
+
+        <form onSubmit={formik.handleSubmit}>
             <Box>
-                <b>Test User Info:</b>
-                <Box>"email": "user@ozitag.com",</Box>
-                <Box>"password": "user"</Box>
+                <label htmlFor="email">Email Address</label>
+            </Box>
+            <Box>
+                <input id="email"
+                    name="email"
+                    type="email"
+                    onChange={formik.handleChange}
+                    value={formik.values.email} />
+            </Box>
+            <Box>
+                <label htmlFor="password">Password</label></Box>
+            <Box>
+                <input id="password"
+                    name="password"
+                    type="password"
+                    onChange={formik.handleChange}
+                    value={formik.values.password} />
             </Box>
 
+            <Button variant="outlined" type="submit">Submit</Button>
+
+        </form>
+
+        <Box >
+            <b>Test User Info:</b>
+            <Box>"email": "user@ozitag.com",</Box>
+            <Box>"password": "user"</Box>
         </Box>
     </Box>
 }
