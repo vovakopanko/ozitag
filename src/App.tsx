@@ -5,7 +5,7 @@ import Content from './components/Content/Content';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import { getAPIAuthentification, getProfileAuthUser } from './components/services/api';
-import { accessTokenType, dataType, tokenData } from './components/type/type';
+import { accessTokenType, dataType } from './components/type/type';
 
 const App = () => {
   const [data, setData] = useState<dataType>({
@@ -13,12 +13,13 @@ const App = () => {
     name: null,
     id: null
   })
-  const [accessToken, setAccessToken] = useState<string | null>(null)
+  const [accessToken, setAccessToken] = useState<accessTokenType>(null)
   const [userData, setUserData] = useState("")
   const [userInfo, setUserInfo] = useState("")
 
   useEffect(() => {
     const loadAuthUserAsync = async () => {
+      console.log("I here")
       try {
         const dataUser = JSON.parse(userData)
         const userDataInfo = await getAPIAuthentification(1, dataUser.email, dataUser.password);
@@ -57,8 +58,8 @@ const App = () => {
 
   return (
     <Box className={style.app}>
-      <Header data={data} setAccessToken={setAccessToken} accessToken={accessToken} />
-      <Content data={data} setUserData={(data: string) => { console.log(data); setUserData(data); }} />
+      <Header data={data} setAccessToken={setAccessToken} accessToken={accessToken} setUserData={setUserData} setData={setData} />
+      <Content data={data} setUserData={setUserData} />
       <Footer />
     </Box>
   );

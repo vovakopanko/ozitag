@@ -12,10 +12,18 @@ export type LoginType = {
     setUserData: (values: string) => void
 }
 
+export type  setDataType = {
+    email: string | null,
+    name: string | null,
+    id: number | null
+}
+
 export type HeaderPropsType = {
     data: dataType
     setAccessToken: (accessToken: string) => void
     accessToken: any
+    setData: ({}:setDataType) => void
+    setUserData: (accessToken: string) => void
 }
 
 export type ContentPropsType = {

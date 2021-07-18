@@ -17,11 +17,17 @@ const useStyles = makeStyles((theme: Theme) =>
     }),
 );
 
-const Header: React.FC<HeaderPropsType> = ({ data, setAccessToken, accessToken }) => {
+const Header: React.FC<HeaderPropsType> = ({ data, setAccessToken, accessToken, setData , setUserData }) => {
 
     const onClickRemoveItems = () => {
         sessionStorage.removeItem('token')
         setAccessToken("")
+        setData({
+            email: null,
+            name: null,
+            id: null
+        })
+        setUserData("")
     }
 
     const email = data.email;
@@ -43,7 +49,7 @@ const Header: React.FC<HeaderPropsType> = ({ data, setAccessToken, accessToken }
             </Box>
             {accessToken ?
                 <Box className={style.authorisation__block} display="flex" alignItems="center">
-                    <NavLink to="/authorization">
+                    <NavLink to="/">
                         <Button
                             variant="contained"
                             color="secondary"

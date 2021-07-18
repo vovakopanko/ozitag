@@ -6,4 +6,18 @@
     background-color: rgb(236, 236, 236);
 }
 
+.login__nameBlock{
+    font-size: 27px;
+    padding: 20px 0px;
+}
+
+.login__form{
+    text-align: center;
+    justify-content: center;
+}
+
+.login__button{
+    margin: 10px;
+}
+
 

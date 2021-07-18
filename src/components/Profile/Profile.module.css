@@ -1,0 +1,9 @@
+.profile__block{
+    display: grid;
+    grid-template-rows: 1fr 1fr 1fr;
+}
+
+.block{
+    grid-row-start: 2;
+    grid-row-end: 3;
+}

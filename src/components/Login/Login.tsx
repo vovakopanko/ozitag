@@ -17,13 +17,13 @@ const Login: React.FC<LoginType> = ({ setUserData }) => {
     })
 
     return <Box className={style.login}>
-        <Box>
-            <b>REGISTRATION:</b>
+        <Box className={style.login__nameBlock}>
+            <b >REGISTRATION:</b>
         </Box>
 
-        <form onSubmit={formik.handleSubmit}>
+        <form onSubmit={formik.handleSubmit} className={style.login__form}>
             <Box>
-                <label htmlFor="email">Email Address</label>
+                <b><label htmlFor="email">Email Address</label></b>
             </Box>
             <Box>
                 <input id="email"
@@ -33,7 +33,8 @@ const Login: React.FC<LoginType> = ({ setUserData }) => {
                     value={formik.values.email} />
             </Box>
             <Box>
-                <label htmlFor="password">Password</label></Box>
+                <b><label htmlFor="password">Password</label></b>
+            </Box>
             <Box>
                 <input id="password"
                     name="password"
@@ -41,8 +42,10 @@ const Login: React.FC<LoginType> = ({ setUserData }) => {
                     onChange={formik.handleChange}
                     value={formik.values.password} />
             </Box>
+            <Box className={style.login__button}>
+                <Button variant="outlined" type="submit" >Submit</Button>
+            </Box>
 
-            <Button variant="outlined" type="submit">Submit</Button>
 
         </form>
 
