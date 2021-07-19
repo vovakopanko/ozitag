@@ -19,7 +19,7 @@ const App = () => {
 
   useEffect(() => {
     const loadAuthUserAsync = async () => {
-      console.log("I here")
+      
       try {
         const dataUser = JSON.parse(userData)
         const userDataInfo = await getAPIAuthentification(1, dataUser.email, dataUser.password);

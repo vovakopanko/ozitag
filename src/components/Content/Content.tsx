@@ -6,7 +6,6 @@ import { ContentPropsType } from "../type/type";
 import style from "./Content.module.css";
 
 const Content: React.FC<ContentPropsType> = ({ data, setUserData }) => {
-
     return (
         <Box className={style.blockmodelt}>
             <Switch>
